@@ -88,16 +88,16 @@ def main():
     # storage method is hdf5
     trainer.extend(
         extensions.snapshot(
-            filename='snapshot_iter_{.updater.epoch}.npz',
+            filename='snapshot_epoch_{.updater.epoch}.npz',
             savefun=save_npz),
         trigger=snapshot_interval)
     trainer.extend(
         extensions.snapshot_object(
-            gen, 'gen_iter_{.updater.epoch}.npz', savefun=save_npz),
+            gen, 'gen_epoch_{.updater.epoch}.npz', savefun=save_npz),
         trigger=snapshot_interval)
     trainer.extend(
         extensions.snapshot_object(
-            dis, 'dis_iter_{.updater.epoch}.npz', savefun=save_npz),
+            dis, 'dis_epoch_{.updater.epoch}.npz', savefun=save_npz),
         trigger=snapshot_interval)
     trainer.extend(extensions.LogReport())
     trainer.extend(
