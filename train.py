@@ -61,13 +61,14 @@ def main():
     opt_dis = make_optimizer(dis)
 
     # Prepare Dataset
-    """
-    train = FaceData()
-    """
-    data_dir = pathlib.Path("./rsize_data_128")
-    abs_data_dir = data_dir.resolve()
-    print("data dir path:", abs_data_dir)
-    data_path = [path for path in abs_data_dir.glob("*.jpg")]
+    paths = ["rsize_data_128", "test_rsize_data_128",
+             "unlabeled_rsize_data_128"]
+    data_path = []
+    for path in paths:
+        data_dir = pathlib.Path(path)
+        abs_data_dir = data_dir.resolve()
+        print("data dir path:", abs_data_dir)
+        data_path += [path for path in abs_data_dir.glob("*.jpg")]
     print("data length:", len(data_path))
     data = ImageDataset(paths=data_path)  # dtype=np.float32
     train_iter = chainer.iterators.SerialIterator(data, batch_size)
