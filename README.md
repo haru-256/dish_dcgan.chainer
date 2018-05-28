@@ -1,1 +1,2 @@
 # dish_dcgan.chainer
+DCGANによる料理画像の生成を目的としたrepository
