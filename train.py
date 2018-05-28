@@ -7,7 +7,7 @@ from chainer.serializers import save_npz
 # from discriminator import Discriminator  # Dence nobias
 from discriminator import Discriminator  # GAP nobias
 from generator import Generator
-from updater import DCGANUpdater
+from updater2 import DCGANUpdater
 from visualize import out_generated_image
 # from accuracy_reporter import accuracy_report
 import pathlib
@@ -27,13 +27,13 @@ def make_optimizer(model, alpha=0.0002, beta1=0.5):
 def main():
     import numpy as np
     # fix seed
-    seed = 0
+    seed = 1
     np.random.seed(seed)
     if chainer.backends.cuda.available:
         chainer.backends.cuda.cupy.random.seed(seed)
 
-    number = 2  # number of experiments
-    gpu = 0  # GAP: 0, Dense: 1
+    number = 10  # number of experiments
+    gpu = 1  # GeForce GTX 1080: 0, TITAN X: 1
     batch_size = 128
     n_hidden = 100
     epoch = 300  # Dence:100 GAP:300
@@ -61,8 +61,11 @@ def main():
     opt_dis = make_optimizer(dis)
 
     # Prepare Dataset
+    """
     paths = ["rsize_data_128", "test_rsize_data_128",
              "unlabeled_rsize_data_128"]  # resize data 128
+    """
+    paths = ["rsize_data_128"]
     data_path = []
     for path in paths:
         data_dir = pathlib.Path(path)
