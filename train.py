@@ -27,12 +27,12 @@ def make_optimizer(model, alpha=0.0002, beta1=0.5):
 def main():
     import numpy as np
     # fix seed
-    seed = 1
+    seed = 0
     np.random.seed(seed)
     if chainer.backends.cuda.available:
         chainer.backends.cuda.cupy.random.seed(seed)
 
-    number = 1  # number of experiments
+    number = 2  # number of experiments
     gpu = 0  # GAP: 0, Dense: 1
     batch_size = 128
     n_hidden = 100
