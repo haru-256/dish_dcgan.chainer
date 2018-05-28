@@ -27,12 +27,12 @@ def make_optimizer(model, alpha=0.0002, beta1=0.5):
 def main():
     import numpy as np
     # fix seed
-    seed = 1
+    seed = 0
     np.random.seed(seed)
     if chainer.backends.cuda.available:
         chainer.backends.cuda.cupy.random.seed(seed)
 
-    number = 1  # number of experiments
+    number = 2  # number of experiments
     gpu = 0  # GAP: 0, Dense: 1
     batch_size = 128
     n_hidden = 100
@@ -61,13 +61,14 @@ def main():
     opt_dis = make_optimizer(dis)
 
     # Prepare Dataset
-    """
-    train = FaceData()
-    """
-    data_dir = pathlib.Path("./rsize_data_128")
-    abs_data_dir = data_dir.resolve()
-    print("data dir path:", abs_data_dir)
-    data_path = [path for path in abs_data_dir.glob("*.jpg")]
+    paths = ["rsize_data_128", "test_rsize_data_128",
+             "unlabeled_rsize_data_128"]
+    data_path = []
+    for path in paths:
+        data_dir = pathlib.Path(path)
+        abs_data_dir = data_dir.resolve()
+        print("data dir path:", abs_data_dir)
+        data_path += [path for path in abs_data_dir.glob("*.jpg")]
     print("data length:", len(data_path))
     data = ImageDataset(paths=data_path)  # dtype=np.float32
     train_iter = chainer.iterators.SerialIterator(data, batch_size)
