@@ -32,11 +32,12 @@ def main():
     if chainer.backends.cuda.available:
         chainer.backends.cuda.cupy.random.seed(seed)
 
+    number = 1  # number of experiments
     gpu = 0  # GAP: 0, Dense: 1
     batch_size = 128
     n_hidden = 100
     epoch = 300  # Dence:100 GAP:300
-    out = "result_1_{}".format(seed)  # GAP:a, Dense:b
+    out = "result_{0}_{1}".format(number, seed)
 
     print('GPU: {}'.format(gpu))
     print('# Minibatch-size: {}'.format(batch_size))
@@ -87,16 +88,16 @@ def main():
     # storage method is hdf5
     trainer.extend(
         extensions.snapshot(
-            filename='snapshot_iter_{.updater.iteration}.npz',
+            filename='snapshot_iter_{.updater.epoch}.npz',
             savefun=save_npz),
         trigger=snapshot_interval)
     trainer.extend(
         extensions.snapshot_object(
-            gen, 'gen_iter_{.updater.iteration}.npz', savefun=save_npz),
+            gen, 'gen_iter_{.updater.epoch}.npz', savefun=save_npz),
         trigger=snapshot_interval)
     trainer.extend(
         extensions.snapshot_object(
-            dis, 'dis_iter_{.updater.iteration}.npz', savefun=save_npz),
+            dis, 'dis_iter_{.updater.epoch}.npz', savefun=save_npz),
         trigger=snapshot_interval)
     trainer.extend(extensions.LogReport())
     trainer.extend(

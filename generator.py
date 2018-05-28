@@ -86,17 +86,14 @@ class Generator(chainer.Chain):
             self.bn3 = L.BatchNormalization(ch // 8)
             self.bn4 = L.BatchNormalization(ch // 16)
 
-    def make_hidden(self, batchsize, xp):
+    def make_hidden(self, batchsize):
         """
         Function that makes z random vector in accordance with the uniform(-1, 1)
 
         batchsize: int
            batchsize indicate len(z)
-
-        xp: numpy, cupy
-            this module used to make random
         """
-        return xp.random.uniform(-1, 1, (batchsize, self.n_hidden))\
+        return np.random.uniform(-1, 1, (batchsize, self.n_hidden))\
                         .astype(np.float32)
 
     def __call__(self, z):

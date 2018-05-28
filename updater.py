@@ -39,8 +39,8 @@ class DCGANUpdater(chainer.training.StandardUpdater):
         # inference
         y_real = dis(x_real)  # Genuine image estimation result
 
-        z = Variable(gen.make_hidden(
-            batch_size, xp))  # genertate z random vector  xp.asarrayでcupy形式に変更する
+        z = Variable(xp.asarray(gen.make_hidden(
+            batch_size)))  # genertate z random vector  xp.asarrayでcupy形式に変更する
         x_fake = gen(z)  # genertate fake data by generator
         y_fake = dis(x_fake)  # Estimation result of fake image
 
