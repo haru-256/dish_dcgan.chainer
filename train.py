@@ -62,7 +62,7 @@ def main():
 
     # Prepare Dataset
     paths = ["rsize_data_128", "test_rsize_data_128",
-             "unlabeled_rsize_data_128"]
+             "unlabeled_rsize_data_128"]  # resize data 128
     data_path = []
     for path in paths:
         data_dir = pathlib.Path(path)
