@@ -4,3 +4,4 @@ result*/
 __pycache__/
 *.gif
 .vscode/settings.json
+*wiki/
