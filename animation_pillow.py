@@ -16,5 +16,5 @@ for epoch in range(1, 301):
     imgs.append(img)
 
 # make gif
-imgs[0].save('anim_{}.gif'.format(strings), save_all=True, append_images=imgs[1:],
+imgs[0].save('result_{}/anim_{}.gif'.format(strings), save_all=True, append_images=imgs[1:],
              optimize=False, duration=200, loop=0)

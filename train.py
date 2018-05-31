@@ -7,7 +7,7 @@ from chainer.serializers import save_npz
 # from discriminator import Discriminator  # Dence nobias
 from discriminator import Discriminator  # GAP nobias
 from generator import Generator
-from updater2 import DCGANUpdater
+from updater import DCGANUpdater
 from visualize import out_generated_image
 # from accuracy_reporter import accuracy_report
 import pathlib
@@ -32,8 +32,8 @@ def main():
     if chainer.backends.cuda.available:
         chainer.backends.cuda.cupy.random.seed(seed)
 
-    number = 10  # number of experiments
-    gpu = 1  # GeForce GTX 1080: 0, TITAN X: 1
+    number = 3  # number of experiments
+    gpu = 0  # GeForce GTX 1080: 0, TITAN X: 1
     batch_size = 128
     n_hidden = 100
     epoch = 300  # Dence:100 GAP:300
@@ -65,7 +65,7 @@ def main():
     paths = ["rsize_data_128", "test_rsize_data_128",
              "unlabeled_rsize_data_128"]  # resize data 128
     """
-    paths = ["rsize_data_128"]
+    paths = ["center_crop_data_128"]  # center ctop data
     data_path = []
     for path in paths:
         data_dir = pathlib.Path(path)
@@ -114,15 +114,10 @@ def main():
     trainer.extend(
         out_generated_image(gen, dis, 5, 5, seed, out),
         trigger=display_interval)
-    # extensionにaccuaracy を求めるのはおかしい?
-    # L.Classifierの様にaccuracyをreportする
-    """
-    trainer.extend(accuracy_report(gen, dis, data=data),
-                   trigger=display_interval)
-    """
     trainer.extend(
         extensions.PlotReport(
-            ['gen/loss', 'dis/loss'], x_key='epoch', file_name='loss.png'))
+            ['gen/loss', 'dis/loss'], x_key='epoch',
+            file_name='loss_{0}_{1}.jpg'.format(number, seed)))
 
     # Run the training
     trainer.run()
