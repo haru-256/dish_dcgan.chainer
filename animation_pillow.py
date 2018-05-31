@@ -1,7 +1,7 @@
 from PIL import Image, ImageFilter
 import pathlib
 
-number = 1  # nmber of experiments
+number = 2  # nmber of experiments
 seed = 1  # seed
 strings = "{0}_{1}".format(number, seed)
 # Pillow のGIF生成，画像読み込みは以下のサイトを参照
