@@ -57,7 +57,7 @@ def out_generated_image(gen, dis, rows, cols, seed, dst):
             'image_{:}epoch.jpg'.format(trainer.updater.epoch)
         if not preview_dir.exists():
             preview_dir.mkdir()
-        axes.set_title("epoch: {}".format(trainer.updater.epoch), fontsize=20)
+        axes.set_title("epoch: {}".format(trainer.updater.epoch), fontsize=18)
         fig.tight_layout()
         fig.savefig(preview_path)
         plt.close(fig)

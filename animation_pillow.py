@@ -1,7 +1,7 @@
 from PIL import Image, ImageFilter
 import pathlib
 
-number = 2  # nmber of experiments
+number = 3  # nmber of experiments
 seed = 1  # seed
 strings = "{0}_{1}".format(number, seed)
 # Pillow のGIF生成，画像読み込みは以下のサイトを参照
@@ -16,5 +16,5 @@ for epoch in range(1, 301):
     imgs.append(img)
 
 # make gif
-imgs[0].save('result_{}/anim_{}.gif'.format(strings), save_all=True, append_images=imgs[1:],
+imgs[0].save('result_{0}/anim_{0}.gif'.format(strings), save_all=True, append_images=imgs[1:],
              optimize=False, duration=200, loop=0)
