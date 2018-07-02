@@ -54,7 +54,7 @@ class Discriminator(chainer.Chain):
                 stride=2,
                 pad=2,
                 nobias=True,
-                initialW=w)  # (, 1, 4, 4)
+                initialW=w)  # (, 1024, 4, 4)
             self.c5 = L.Convolution2D(
                 in_channels=None,
                 out_channels=1,
